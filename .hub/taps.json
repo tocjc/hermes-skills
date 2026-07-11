@@ -1,0 +1,8 @@
+{
+  "taps": [
+    {
+      "repo": "https://github.com/tocjc/hermes-skills",
+      "path": "skills/"
+    }
+  ]
+}

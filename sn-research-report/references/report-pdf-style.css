@@ -1,0 +1,126 @@
+/* report-pdf-style.css
+ * PDF样式表 — 用于sn-research-report的PDF交付环节
+ * 专为中文学术报告设计：表格斑马纹、章节标题层级配色、引用块样式、A4纸张
+ * 配合 WeasyPrint 或 wkhtmltopdf 使用
+ */
+
+body {
+  font-family: 'Noto Sans CJK SC', 'WenQuanYi Micro Hei', 'Noto Sans SC', sans-serif;
+  font-size: 11pt;
+  line-height: 1.7;
+  color: #1a1a2e;
+  max-width: 210mm;
+  padding: 20mm 25mm;
+}
+
+/*=== 标题层级 ===*/
+h1 {
+  font-size: 20pt;
+  color: #0f766e;
+  border-bottom: 3px solid #0f766e;
+  padding-bottom: 8px;
+  margin-top: 28px;
+  page-break-before: always;
+}
+h1:first-of-type { page-break-before: avoid; }
+
+h2 {
+  font-size: 15pt;
+  color: #134e4a;
+  border-bottom: 1.5px solid #94a3b8;
+  padding-bottom: 5px;
+  margin-top: 22px;
+}
+
+h3 {
+  font-size: 12pt;
+  color: #2563eb;
+  margin-top: 16px;
+}
+
+h4 {
+  font-size: 11pt;
+  color: #475467;
+  margin-top: 12px;
+}
+
+/*=== 段落 ===*/
+p { margin: 6px 0; text-align: justify; }
+
+/*=== 表格 ===*/
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+  font-size: 9pt;
+  page-break-inside: avoid;
+}
+
+table th {
+  background: #0f766e;
+  color: white;
+  padding: 6px 8px;
+  text-align: left;
+  font-weight: 600;
+}
+
+table td {
+  padding: 5px 8px;
+  border: 1px solid #d0d5dd;
+}
+
+table tr:nth-child(even) { background: #f8fafc; }
+table tr:nth-child(odd)  { background: #ffffff; }
+
+/*=== 代码 ===*/
+code {
+  font-family: 'Liberation Mono', 'Courier New', monospace;
+  font-size: 9pt;
+  background: #f1f5f9;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+pre {
+  background: #f8f9fa;
+  border: 1px solid #d0d5dd;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 8.5pt;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/*=== 引用块 ===*/
+blockquote {
+  border-left: 4px solid #0f766e;
+  margin: 12px 0;
+  padding: 8px 14px;
+  background: #f0fdfa;
+  font-size: 10pt;
+}
+
+/*=== 分割线 ===*/
+hr {
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  margin: 18px 0;
+}
+
+/*=== 强调 ===*/
+strong { font-weight: 700; color: #1a1a2e; }
+em { color: #475467; }
+
+/*=== 列表 ===*/
+ul, ol { margin: 6px 0; padding-left: 22px; }
+li { margin: 3px 0; }
+
+/*=== 表格警告/备注框（用于 ⚠️ 等）===*/
+blockquote.warning {
+  border-left-color: #c2410c;
+  background: #fff7ed;
+}
+
+/*=== 防止表格跨页截断 ===*/
+tr { page-break-inside: avoid; }

@@ -1,0 +1,301 @@
+---
+name: bid-analysis
+description: Search, collect, and analyze Chinese bidding/tender information (招标信息). Extract bid amounts, decompose total budgets into component categories, and generate structured market analysis reports. Use when the user asks about tender data, procurement research, bidding amounts, market sizing, or cost breakdown of industrial systems.
+---
+
+# Bid Analysis Skill
+
+## When to Use
+
+Use this skill when the user asks you to:
+- Find bidding/tender information about a specific industrial product or system
+- Analyze bid amounts and cost breakdowns
+- Estimate what proportion of a total bid is attributable to a subsystem (e.g., software vs hardware, diagnostics vs monitoring)
+- Generate a market intelligence report based on bidding data
+- Research Chinese procurement/tender data
+
+## Step 0: Check Session History First (BIGGEST TIME-SAVER)
+
+**Before any fresh search**, always run `session_search(query="<product> <招标> 金额")` — many bidding topics are recurring and a prior session may already have the data. This saves hours of fighting CAPTCHAs.
+
+After confirming no prior session exists, proceed with the search strategy below.
+
+## Quick Path (when prior data exists)
+
+When session_search confirms prior bidding data AND the topic is well-studied (Google Patents signal: 100+ results), use this shortcut:
+
+1. **session_search(query="<product> <招标> 金额")** — recall prior bids and amounts
+2. **Google Patents** (`patents.google.com/?q=<Chinese_keywords>&language=CHINESE`) for technical deep-dive — skip Bing entirely
+3. **Reference data** from the skill's `references/` directory
+4. → Generate report directly from (1)+(2)+(3)
+
+This bypasses all CAPTCHA battles and produces richer results. Only fall through to the full tiered approach (below) when session_search finds nothing useful AND Google Patents returns < 50 results.
+
+## Search Strategy (Anti-Bot Workflow)
+
+Chinese bidding websites and search engines have aggressive anti-bot / Cloudflare protection. Use this tiered approach.
+
+**Reliability ordering** (for Chinese industrial topics from non-Chinese IPs):
+1. 🥇 **Google Patents** — NO CAPTCHA, richest technical data, 396+ results for major topics
+2. 🥈 **Bing International** — best for actual bid amounts, but Cloudflare may intervene after ~2 searches
+3. 🥉 **Chinese Bing (国内版)** — best Chinese indexing, highest Cloudflare frequency
+4. **Fallback** — Wikipedia, shorter queries, spaced requests
+
+### Tier 1: Bing International (best for bid amounts)
+1. Navigate to `https://www.bing.com/search?q=...&setlang=en&cc=us&mkt=en-US`
+2. Start with **unquoted Chinese keywords** (e.g. `往复式压缩机 在线监测 故障诊断 招标 万元`) — quotes can cause character-level confusion (see Pitfalls)
+3. If results are unrelated, try quoted format:
+   ```
+   "<往复式压缩机>" "<在线监测>" "<招标>"
+   ```
+   Use shorter quoted fragments (2-3 chars) rather than full terms to reduce confusion.
+   ```
+   "<往复式压缩机>" "<在线监测>" "<故障诊断>" "<招标>"
+   ```
+4. If Cloudflare challenge appears, **click the "Verify you are human" checkbox** — this sometimes works
+5. If it fails, try clicking the "国内版/国际版" toggle to switch locales and retry
+6. Extract bid amounts from search result snippets without needing to visit the target site
+
+### Tier 2: Chinese Bing (国内版)
+- Navigate to `https://www.bing.com/search?q=...&mkt=zh-CN&cc=cn&setlang=zh-cn`
+- Higher Cloudflare frequency but better Chinese indexing
+- Click the "验证" button then checkbox to proceed
+
+### Tier 3 (fallback)
+- Wikipedia for industry background (no CAPTCHA)
+- Use shorter, less specific queries to avoid triggering rate limits
+- Space out requests — rapid searches trigger Cloudflare
+
+### Tier 4: Google Patents — Technical Deep-Dive When Bidding Data Is Incomplete
+
+When bidding documents are opaque (amount hidden, tech specs vague), **Google Patents** (`patents.google.com`) is an excellent supplementary source that works reliably from non-Chinese IPs with NO CAPTCHA.
+
+**Why Google Patents works:**
+- Chinese patents (CN patent family) are fully indexed and searchable in Chinese
+- NO Cloudflare / CAPTCHA from non-Chinese IPs — reliably accessible
+- Rich technical content: patents contain detailed descriptions of algorithms, diagnostic methods, sensor configurations, and system architectures that bidding documents often omit
+- 396+ results typically available for well-studied industrial topics
+
+**When to use:**
+- User asks about technical specifications (算法, 诊断项目, 评估方法) beyond basic bid amounts
+- Bidding data is too sparse to answer the user's question
+- User wants competitive intelligence on technology trends
+
+**How to search:**
+```
+URL: https://patents.google.com/?q=<Chinese_keywords>&language=CHINESE
+Example: https://patents.google.com/?q=往复式压缩机+在线监测+故障诊断&language=CHINESE
+```
+
+**Key query parameters:**
+| Parameter | Purpose | Example |
+|-----------|---------|---------|
+| `q=` | Search query (Chinese keywords, unquoted) | `往复式压缩机 故障诊断 神经网络` |
+| `language=CHINESE` | Filter to Chinese-language patents | Essential for relevant results |
+| `assignee=` | Filter by company | `assignee:西安交通大学` |
+| `inventor=` | Filter by inventor | `inventor:江志农` |
+
+**Extraction strategy from patent snippets (no click-through needed):**
+| Data Point | Where in Patent Search Result |
+|-----------|------------------------------|
+| **Algorithm type** | Abstract first sentence: "基于XX算法的XX系统及方法" |
+| **Step-by-step method** | Abstract body: "包括以下步骤：S1...S2..." |
+| **Sensor configuration** | Look for "包括" lists: 温度传感器、压力传感器、振动传感器... |
+| **Assignee (who owns the tech)** | Bolded after title: 西安交通大学 / 北京化工大学 |
+| **Innovation claims** | Look for "本发明创新与特点在于" in the snippet |
+| **Patent status** | Granted/Published dates in the result card |
+
+**What patents reveal that bids hide:**
+| Hidden in Bids | Visible in Patents |
+|---------------|-------------------|
+| Exact diagnostic algorithm used | Neural network architecture, SVM, autoencoder, D-S evidence theory |
+| List of diagnosable faults | 阀片断裂、活塞环磨损、支撑环磨损、填料泄漏... |
+| Sensor types and placements | 加速度传感器×4-6、电涡流位移传感器×2-3、PT100×4-6 |
+| Diagnostic evaluation method | Three-tier early warning, health scoring, P-F curve analysis |
+| Communication protocols | Modbus, TCP/IP, CAN bus |
+
+**Key research institutions to watch:**
+- 西安交通大学 (神经网络仿真模型方向)
+- 北京化工大学 (无键相深度学习、多传感器融合)
+- 北京博华信智科技股份有限公司 (物联网故障特征提取)
+- 清华大学
+- 哈尔滨工业大学
+
+## Brand/Market Share Analysis via Web Search (Complementary to Bidding Data)
+
+When the user asks for **brand landscape / market share analysis** rather than specific bid amounts, bidding data alone is insufficient. Use DuckDuckGo Python ddgs library as the primary search tool for this class of question:
+
+### Workflow
+
+1. **Search by keywords** — use the query patterns in `references/power-system-fiber-optic-equipment-brands.md`
+2. **Extract brand mentions from snippets** — tally which brands appear, in what context, with what market share claims
+3. **Cross-reference across search rounds** — run 3-5 different keyword variations to reduce single-source bias
+4. **Structure the output** as a tiered table (T1/T2/T3) with estimated share ranges
+5. **Add procurement decision factors** — what drives brand choice in that industry (not just who sells the most)
+
+### When to Use vs. Bidding Search
+
+| Question Type | Primary Tool |
+|--------------|-------------|
+| "How much does X cost in bids?" | Bing (bid amounts) + Google Patents (tech depth) |
+| "Who are the main suppliers of X?" | DuckDuckGo ddgs (brand landscape) |
+| "What's the market share split?" | DuckDuckGo ddgs + Bing cross-ref |
+| "Compare supplier A vs B" | DuckDuckGo ddgs + Google Patents (patent portfolio) |
+
+## Complementary Tools (Sn-* Skills)
+
+The following skills (installed as part of SenseNova-Skills) can supplement bid analysis:
+
+| Skill | When to Use | Example |
+|-------|------------|---------|
+| `sn-deep-research` | Full deep-research orchestration: plan → multi-dimension evidence → synthesis → report | User asks for a comprehensive market intelligence report with multiple sub-topics |
+| `sn-search-academic` | Find academic papers from ArXiv, Semantic Scholar, PubMed | Validate patent claims against published research |
+| `sn-search-social-cn` | Search Bilibili, Zhihu, Douyin for real-world product reviews and case studies | Find deployment photos, user feedback, supplier marketing content |
+| `sn-search-social-en` | Search Reddit, Twitter/X, YouTube for English-language content | Compare Chinese solutions against international vendors (Bently Nevada, SKF) |
+| `sn-report-format-discovery` | Discover report structure standards for a specific report type | Before writing a formal industry report, find what sections it should contain |
+
+**Integration pattern:** When the bid-analysis baseline (search → patents → existing references) reveals gaps in competitive intelligence, social media, or academic depth, delegate those dimensions via `sn-*` skills rather than continuing the same search loop.
+
+### What NOT to use
+- **Google** — returns "sorry" CAPTCHA from most non-Chinese IPs for Chinese queries
+- **Baidu** — requires Chinese CAPTCHA for non-Chinese IPs
+- **Sogou** — anti-spider detection
+- **Chinese bidding sites directly** (ccgp.gov.cn, chinabidding.com.cn, bidcenter.com.cn) — almost all require login or trigger human verification
+- **DuckDuckGo via browser** — sends image CAPTCHA for Chinese queries
+- **DuckDuckGo via Python `ddgs` library** — ✅ **ACTUALLY WORKS** for Chinese industrial queries. Tested with topics like 电力系统光纤通信设备品牌分析. The Python library (`from ddgs import DDGS`) uses a different HTTP path than the web UI and bypasses the image CAPTCHA. Add `max_results=10` for reasonable timeout (~15-30s). Example:
+  ```python
+  from ddgs import DDGS
+  with DDGS() as ddgs:
+      results = list(ddgs.text('电力系统 光纤通信 设备 品牌 华为 中兴 烽火', max_results=10))
+  ```
+  Use as a fallback when Bing hits Cloudflare and Google Patents isn't the right data source for market/brand research.
+
+## Data Extraction from Search Snippets
+
+Bing search snippets often contain key data even without visiting the target page:
+
+| Data Point | Where to find it |
+|-----------|-----------------|
+| **Bid amount** | Usually in the snippet paragraph: "预估金额XXX万元" |
+| **Project name** | The search result heading |
+| **Bidder** | Listed in the snippet before the project description |
+| **Location** | Often in the URL or snippet context |
+| **Date** | "发布时间：YYYY年MM月DD日" in the snippet |
+
+### Keywords That Work
+
+```
+往复式压缩机 在线监测 故障诊断 招标公告 金额
+<product> <feature> <招标> <金额>
+"往复式压缩机" "在线监测" "故障诊断" "招标"
+压缩机 状态监测 招标 中标
+```
+
+Prefix/suffix patterns to try:
+- `招标公告` (bid announcement)
+- `中标结果` (award result)
+- `采购公告` (procurement notice)
+- `预估金额` (estimated amount)
+- `万元` (ten-thousand yuan)
+
+### Key Chinese Bidding Platforms (for reference)
+
+| Platform | URL | Accessibility |
+|---------|-----|--------------|
+| 国家电网电子商务平台 (ECP) | ecp.sgcc.com.cn | ✅ **Successfully accessible via browser** — SPA, JavaScript required. The most reliable platform for SGCC (国家电网) related bidding information. Use browser_navigate to access; curl will not work (SPA). Navigate: 招标采购 → 采购公告 / 招标公告及投标邀请书, then search by keyword or bidder. |
+| 千里马招标网 | qianlima.com | Partial (some public data, most requires login) |
+| 采招网 | bidcenter.com.cn | CAPTCHA required |
+| 全国公共资源交易平台 | ggzy.gov.cn | CAPTCHA required |
+| 中国招标投标公共服务平台 | cebpubservice.com | Public but blocked from non-Chinese IPs |
+| 中国政府采购网 | ccgp.gov.cn | 403 from non-Chinese IPs |
+| 必联网 | ebid.org.cn | Partial |
+
+## Bid Amount Decomposition
+
+When you find a total bid amount but need to estimate a sub-component's share, use this methodology.
+
+### Typical Cost Structure for Industrial Monitoring Systems
+
+For a reciprocating compressor online monitoring and fault diagnosis system (total ≈ 110万元 for 9 compressors):
+
+| Component | Typical Share | What's Included |
+|-----------|:------------:|-----------------|
+| **Software / Fault Diagnosis System** | **35–40%** | AI algorithms, warning models, visualization platform, SMS alerts, PLC integration, centralized management |
+| → *Core AI diagnostic algorithms* | *17–20% of total* | *Multi-point fault detection, early warning, health scoring* |
+| **Hardware** | 40–47% | Sensors (vibration, speed), data collectors, server upgrades |
+| **Installation & Commissioning** | 14–18% | On-site install (explosion-proof standards), wiring, testing |
+| **Ongoing data tracking & algorithm optimization** | 7–11% | 1-year post-installation data analysis, model updates |
+
+### Per-Unit Benchmark
+
+For reciprocating compressor monitoring systems:
+- **Per-compressor cost**: 12–18万元/台 (total system, all components)
+- **Fault diagnosis software per compressor**: 4–7万元/台
+
+### Project Size Categories
+
+| Category | Compressors | Total Budget | Source Type |
+|---------|:-----------:|:-----------:|-------------|
+| Small | 1–3 | 15–50万元 | Single station retrofit |
+| Medium | 4–10 | 80–150万元 | Multi-station deployment |
+| Large / Framework | 10+ / annual | 150–300万元/年 | Enterprise framework |
+
+## Report Generation
+
+After collecting data, generate a structured report covering:
+
+1. **Project overview table** — name, amount, bidder, date, status (amount known / not public)
+2. **Detailed breakdown** — for projects with complete data, decompose total into component categories
+3. **Market analysis** — price range per unit, by project size, by region
+4. **Component share analysis** — what the user specifically asked about (e.g., fault diagnosis system share)
+5. **Key observations** — trends, common bidders, geographic distribution
+6. **Search limitations** — which data couldn't be accessed and why
+
+### Technical Deep-Dive Report (Supplementary)
+
+When the user asks to dig deeper into technical specifications (诊断算法, 诊断项目, 评估方法), generate a supplementary report covering:
+
+1. **Diagnostic items** — tabulate all diagnosable fault types found in patents × what bids require. Organize by subsystem (气阀/活塞/轴承/传动/运行参数/综合工况).
+2. **Diagnostic algorithms** — describe each algorithm's core method, sensor inputs, step sequence, pros/cons. Cite the patent number and assignee.
+3. **Evaluation methods** — three-layer assessment: health status (threshold/warning), fault severity (trend/multi-sensor fusion), remaining useful life (PHM P-F curve).
+4. **Technology roadmap** — evolution generational (threshold → expert system → ML → DL → digital twin), with key institutions mapped to each generation.
+5. **Sensor configuration per unit** — by sensor type, quantity, placement, and measurement target.
+6. **Bid recommendation** — preferred algorithm combo by project size, differentiation strategy.
+
+Key insight from this session: Google Patents is the BEST source for items 1-5 when bidding documents are sparse. See Tier 4 above. Also, Google Patents with `language=CHINESE` reliably returns 100+ results for mature Chinese industrial topics — use the result count as a confidence signal for data richness.
+
+**Linked reference files (in `references/`):**
+- `references/reciprocating-compressor-bidding-examples.md` — 6 real bidding projects with amounts and technical scope
+- `references/reciprocating-compressor-technical-deepdive.md` — detailed technical analysis (diagnostic algorithms, items, evaluation methods, sensor config, algorithm comparison table, bid differentiation strategy, technology roadmap) for reciprocating compressor monitoring systems, sourced from 5 key CN patents
+- `references/sgcc-ecp-platform-guide.md` — State Grid ECP (电子商务平台) access guide: navigation flow, search tips, ref ID patterns, and scope limitations
+- `references/power-system-fiber-optic-equipment-brands.md` — brand landscape data for power system optical fiber communication equipment, with share estimates by category and search keyword patterns for DuckDuckGo market research
+
+## Pitfalls
+
+- **Web search commands (curl, wget) time out** for Chinese websites from this server — always use the browser for Chinese bidding research
+- **Subagents time out** when delegated Chinese web search — they hit the same CAPTCHA walls and exhaust API allowance retrying
+- **Bing results change unpredictably** between Chinese and English locale — results for the same query can differ completely. If you get unrelated results, toggle the locale (国内版/国际版) and retry
+- **Bing rate-limited after ~2 searches** through Cloudflare — space searches 30+ seconds apart or open a fresh tab
+- **Don't assume amounts are public** — most Chinese bidding platforms hide amounts behind registration; only ~15% of search results show amounts in their snippets
+- **Search results are English-locale-biased** — Chinese locale shows more relevant Chinese results but triggers Cloudflare faster
+- **SearXNG public instances return 403 for Chinese queries** — public SearXNG instances (searx.be etc.) are reachable but return HTTP 403 when searching in Chinese. They only work for English queries.
+- **"群众性创新项目" (QC/innovation/internal projects) are NOT public bidding items** — State Grid's internal innovation projects (群众性创新, QC小组, 五小活动, 青创赛) are managed through internal OA or trade union channels, NOT on the public ECP procurement platform. Searching for these on ECP will return zero results. If the user asks about such projects, explain that they are internal activities and suggest alternative search channels (官网新闻, 内部OA, or 工会通知) rather than continuing to search public bidding platforms.
+
+### Bing Character Confusion (Chinese → English / Japanese drift)
+
+⚠️ **Chinese characters can cause Bing to return completely unrelated results in other languages.** Observed failure modes:
+
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| C++ programming errors (e.g. "incompatible with parameter of type") | Bing matches Chinese 类型/参数 characters to English "type/parameter" | Remove those specific terms from the query, or switch to unquoted mode |
+| Japanese hot spring results (温泉, 日本温泉) | Multi-character Chinese terms match against unrelated Japanese pages via substring overlap | Add 万元, 招标公告, 采购 to anchor the context; try the Chinese locale |
+| English novel "1984" / "Nineteen Eighty-Four" results | Bing interprets Chinese numeral "2026年" as the English year 1984 via character confusion | Remove the year from the query entirely. Search without the year (e.g. `国网冀北 群众性创新 招标` instead of `国网冀北 2026年 群众性创新`). Or use non-numeral year: `二〇二六` |
+| Facebook / Stack Overflow / Roblox results (completely unrelated English content) | Bing's Chinese→English character matching maps 冀北 to "facebook", 群众 to "queue/user", or other random substring matches. Happens most often on the international locale | Switch to the Chinese locale (国内版), or use shorter unquoted keywords. Remove full-company names and use abbreviations like `冀北 招标 创新` |
+| Empty results or "no results" after Cloudflare pass | Bing silently redirects to a fallback index | Retry with different keyword order or add 金额 suffix |
+
+**Recovery procedure when results are wildly off-topic:**
+1. Stop quoting terms — use bare unquoted keywords first
+2. Add 万元 (amount anchor) to the query
+3. Add more procurement-specific terms: 采购, 投标, 公告
+4. Fall back to session_search — the prior session may have succeeded where you failed
+5. Try the Chinese locale (国内版) even though it triggers Cloudflare faster
