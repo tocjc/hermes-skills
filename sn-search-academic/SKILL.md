@@ -276,6 +276,17 @@ python3 scripts/wikipedia_search.py "深度学习" --lang zh --limit 5
 | | `q-bio.GN` | 基因组学 |
 | | `q-bio.QM` | 定量方法 |
 
+## 当论文搜索不到时 — 搜索策略速查
+
+当标准搜索无结果时，遵循以下快速判断路径：
+
+1. **并行搜索** — 同时查 CrossRef、OpenAlex、Semantic Scholar、arXiv（用 `delegate_task` 或并行工具调用）
+2. **第3方数据库无结果** → 不要浏览器搜索（Google Scholar / IEEE Xplore / Bing 从云 IP 必被 CAPTCHA 拦截）
+3. **直接问用户** — 索要 DOI、IEEE 文章编号、作者全名、或链接
+4. **有 DOI 或文章编号** → 用 `mcp_scansci_pdf_smart_download` 下载
+
+完整策略、已知陷阱和已验证的可靠来源见 `references/hard-to-find-papers.md`。
+
 ## 输出格式
 
 所有脚本输出标准 JSON：

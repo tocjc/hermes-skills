@@ -1,37 +1,93 @@
 {
   "version": 1,
   "installed": {
-    "pptx-author": {
+    "duckduckgo-search": {
       "source": "official",
-      "identifier": "official/finance/pptx-author",
+      "identifier": "official/research/duckduckgo-search",
       "trust_level": "builtin",
-      "scan_verdict": "backfilled",
-      "content_hash": "sha256:4ec63d16a63a7bcb",
-      "install_path": "finance/pptx-author",
+      "scan_verdict": "caution",
+      "content_hash": "sha256:f7401d0c49ae6067",
+      "install_path": "research/duckduckgo-search",
       "files": [
-        "SKILL.md"
+        "SKILL.md",
+        "scripts/duckduckgo.sh"
       ],
-      "metadata": {
-        "backfilled_from": "optional-skills"
-      },
-      "installed_at": "2026-06-05T02:38:44.042781+00:00",
-      "updated_at": "2026-06-05T02:38:44.042781+00:00"
+      "metadata": {},
+      "installed_at": "2026-05-23T11:22:06.888751+00:00",
+      "updated_at": "2026-05-23T11:22:06.888763+00:00"
+    },
+    "searxng-search": {
+      "source": "official",
+      "identifier": "official/research/searxng-search",
+      "trust_level": "builtin",
+      "scan_verdict": "caution",
+      "content_hash": "sha256:9f8fe3304fd44d5d",
+      "install_path": "research/searxng-search",
+      "files": [
+        "SKILL.md",
+        "scripts/searxng.sh"
+      ],
+      "metadata": {},
+      "installed_at": "2026-05-23T11:22:30.061408+00:00",
+      "updated_at": "2026-05-23T11:22:30.061419+00:00"
     },
     "parallel-cli": {
       "source": "official",
       "identifier": "official/research/parallel-cli",
       "trust_level": "builtin",
-      "scan_verdict": "backfilled",
-      "content_hash": "sha256:282c47f1ccf02e00",
+      "scan_verdict": "dangerous",
+      "content_hash": "sha256:59245b30f3d9426a",
       "install_path": "research/parallel-cli",
       "files": [
         "SKILL.md"
       ],
-      "metadata": {
-        "backfilled_from": "optional-skills"
-      },
-      "installed_at": "2026-06-05T02:38:44.053039+00:00",
-      "updated_at": "2026-06-05T02:38:44.053039+00:00"
+      "metadata": {},
+      "installed_at": "2026-05-23T11:22:56.080646+00:00",
+      "updated_at": "2026-05-23T11:22:56.080659+00:00"
+    },
+    "pptx-author": {
+      "source": "official",
+      "identifier": "official/finance/pptx-author",
+      "trust_level": "builtin",
+      "scan_verdict": "caution",
+      "content_hash": "sha256:716f68baffa3f04d",
+      "install_path": "finance/pptx-author",
+      "files": [
+        "SKILL.md"
+      ],
+      "metadata": {},
+      "installed_at": "2026-05-23T11:22:58.137778+00:00",
+      "updated_at": "2026-05-23T11:22:58.137791+00:00"
+    },
+    "excel-author": {
+      "source": "official",
+      "identifier": "official/finance/excel-author",
+      "trust_level": "builtin",
+      "scan_verdict": "caution",
+      "content_hash": "sha256:224735b85e486a40",
+      "install_path": "finance/excel-author",
+      "files": [
+        "SKILL.md",
+        "scripts/recalc.py"
+      ],
+      "metadata": {},
+      "installed_at": "2026-05-23T11:23:00.181833+00:00",
+      "updated_at": "2026-05-23T11:23:00.181848+00:00"
+    },
+    "stocks": {
+      "source": "official",
+      "identifier": "official/finance/stocks",
+      "trust_level": "builtin",
+      "scan_verdict": "caution",
+      "content_hash": "sha256:679f1ec3763154e2",
+      "install_path": "finance/stocks",
+      "files": [
+        "SKILL.md",
+        "scripts/stocks_client.py"
+      ],
+      "metadata": {},
+      "installed_at": "2026-05-23T11:23:02.340194+00:00",
+      "updated_at": "2026-05-23T11:23:02.340209+00:00"
     },
     "baoyu-article-illustrator": {
       "source": "official",
@@ -80,8 +136,8 @@
       "metadata": {
         "backfilled_from": "optional-skills"
       },
-      "installed_at": "2026-06-30T18:05:44.407583+00:00",
-      "updated_at": "2026-06-30T18:05:44.407583+00:00"
+      "installed_at": "2026-07-03T13:29:02.040423+00:00",
+      "updated_at": "2026-07-03T13:29:02.040423+00:00"
     },
     "baoyu-comic": {
       "source": "official",
@@ -130,8 +186,8 @@
       "metadata": {
         "backfilled_from": "optional-skills"
       },
-      "installed_at": "2026-06-30T18:05:44.461878+00:00",
-      "updated_at": "2026-06-30T18:05:44.461878+00:00"
+      "installed_at": "2026-07-03T13:29:02.088330+00:00",
+      "updated_at": "2026-07-03T13:29:02.088330+00:00"
     },
     "pixel-art": {
       "source": "official",
@@ -152,8 +208,8 @@
       "metadata": {
         "backfilled_from": "optional-skills"
       },
-      "installed_at": "2026-06-30T18:05:44.492091+00:00",
-      "updated_at": "2026-06-30T18:05:44.492091+00:00"
+      "installed_at": "2026-07-03T13:29:02.167128+00:00",
+      "updated_at": "2026-07-03T13:29:02.167128+00:00"
     },
     "minecraft-modpack-server": {
       "source": "official",
@@ -168,8 +224,8 @@
       "metadata": {
         "backfilled_from": "optional-skills"
       },
-      "installed_at": "2026-06-30T18:05:44.507721+00:00",
-      "updated_at": "2026-06-30T18:05:44.507721+00:00"
+      "installed_at": "2026-07-03T13:29:02.249108+00:00",
+      "updated_at": "2026-07-03T13:29:02.249108+00:00"
     },
     "pokemon-player": {
       "source": "official",
@@ -184,8 +240,8 @@
       "metadata": {
         "backfilled_from": "optional-skills"
       },
-      "installed_at": "2026-06-30T18:05:44.510131+00:00",
-      "updated_at": "2026-06-30T18:05:44.510131+00:00"
+      "installed_at": "2026-07-03T13:29:02.251297+00:00",
+      "updated_at": "2026-07-03T13:29:02.251297+00:00"
     },
     "dspy": {
       "source": "official",
@@ -203,8 +259,8 @@
       "metadata": {
         "backfilled_from": "optional-skills"
       },
-      "installed_at": "2026-06-30T18:05:44.520316+00:00",
-      "updated_at": "2026-06-30T18:05:44.520316+00:00"
+      "installed_at": "2026-07-03T13:29:02.259061+00:00",
+      "updated_at": "2026-07-03T13:29:02.259061+00:00"
     }
   }
 }
