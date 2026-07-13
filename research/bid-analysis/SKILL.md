@@ -13,6 +13,7 @@ Use this skill when the user asks you to:
 - Estimate what proportion of a total bid is attributable to a subsystem (e.g., software vs hardware, diagnostics vs monitoring)
 - Generate a market intelligence report based on bidding data
 - Research Chinese procurement/tender data
+- **Review/audit an existing bidding technical proposal for quality issues** — grammar errors, logic errors, common sense errors, formatting inconsistencies
 
 ## Step 0: Check Session History First (BIGGEST TIME-SAVER)
 
@@ -328,6 +329,68 @@ When the user asks to dig deeper into technical specifications (诊断算法, �
 6. **Bid recommendation** — preferred algorithm combo by project size, differentiation strategy.
 
 Key insight from this session: Google Patents is the BEST source for items 1-5 when bidding documents are sparse. See Tier 4 above. Also, Google Patents with `language=CHINESE` reliably returns 100+ results for mature Chinese industrial topics — use the result count as a confidence signal for data richness.
+
+## 投标文件质量审查 (Bid Document Quality Audit)
+
+When the user asks you to **review an existing bid/technical proposal** for quality issues — grammar, logic, common sense, formatting — use this systematic audit workflow.
+
+### Workflow
+
+1. **Extract full text** — use `python-docx` to read paragraphs and tables from .docx
+2. **Three-category audit** — classify every issue found into one of:
+   - 🔴 **语法错误** — typos, repeated words, wrong measure words, numbering jumps, mixed punctuation, formatting inconsistencies
+   - 🟠 **逻辑错误** — contradictions, timeline infeasibility, expertise mismatch, data inconsistency, circular reasoning
+   - 🟠 **常识错误** — unsubstantiated quantitative claims, unrealistic promises, scope overreach, regulatory violations
+3. **Severity rating** — assign each issue:
+   - 🔴 **致命** — directly impacts scoring/rejection (e.g., duplicate "大学大学", PM experience irrelevant to project)
+   - 🟡 **中等** — reduces credibility but not disqualifying (e.g., lack of quantified targets, vague algorithm description)
+   - 🟢 **轻微** — cosmetic (e.g., mixed full/half-width spaces, minor punctuation)
+4. **Prioritized整改建议** — output a ranked action list with P0/P1/P2 ordering
+
+###常见审查模式 (Pattern Library)
+
+| 审查维度 | 典型问题 | 检查方法 |
+|---------|---------|----------|
+| **PM 业绩匹配度** | 项目负责人过往项目与投标方向零相关 | 逐一比对每个历史项目与投标项目的技术领域 |
+| **时间线合理性** | 论文投稿→录用周期与项目工期重叠不合理 | 核心期刊审稿3-6个月，项目剩余工期是否足够 |
+| **团队配置** | 本科生/非相关专业成员出现在项目组 | 检查每个成员的专业方向与项目技术领域的关联度 |
+| **量化承诺** | 未经证实的精确百分比（"释放80%人力"） | 追问"这个数字的依据是什么？" |
+| **数据一致性** | 不同章节列出的项目数量/金额不一致 | 交叉比对业绩表与简历表 |
+| **编号/格式** | 跳号、编号顺序颠倒、量词错误 | 逐行检查编号连续性 |
+| **论文交付** | 投稿→录用周期是否在项目工期范围内 | 核心期刊录用需3-6个月，预留足够时间 |
+
+### 严重程度矩阵模板
+
+| 类别 | 🔴 致命 | 🟡 中等 | 🟢 轻微 |
+|------|:-------:|:-------:|:-------:|
+| 语法/格式 | 2（大学重复、编号混乱） | 1（量词错误） | 4（逗号、空格等） |
+| 逻辑 | 1（PM业绩不匹配） | 3（时间线、人员、数据矛盾） | 0 |
+| 常识 | 1（80%承诺） | 1（论文周期） | 1（表格空列） |
+
+### 输出格式
+
+```
+## 一、🔴 语法错误
+| # | 位置 | 原文 | 问题 | 修正建议 |
+
+## 二、🟠 逻辑错误
+| 错误 | 分析 | 影响 |
+
+## 三、🟠 常识错误
+| 原文 | 问题 | 建议 |
+
+## 四、💡 整改优先级
+P0 🔴 — 立即修改
+P1 🟡 — 建议修改
+P2 🟢 — 可选优化
+```
+
+### 关键踩坑
+
+- **不要只看内容不看结构** — 表格内部的编号混乱（如"1,2,3,5,4"跳号）拖拽式复制文档时常见
+- **PM业绩是审查第一优先级** — 评审专家最先看的就是项目负责人是否做过同类项目，无关业绩是致命扣分项
+- **量化承诺需要"可追溯"** — 任何"提升XX%""提前XX天"的表述必须有数据来源或测算逻辑，否则视为空头支票
+- **论文时间线是高频陷阱** — 投标方常低估论文从投稿到录用的实际周期，必须交叉验证
 
 ## 投标技术方案编写 (Technical Proposal Writing for Bids)
 
