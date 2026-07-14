@@ -145,14 +145,21 @@ run.font.name = "宋体"
 
 Use `RGBColor(0x1A, 0x3C, 0x6E)` for section heading colors — looks professional in Chinese bidding documents.
 
-### Font for Chinese text
+### Font for Chinese text (SAFE pattern — avoid AttributeError)
 
 ```python
 from docx.oxml.ns import qn
+from lxml import etree
+
 run.font.name = 'Times New Roman'  # western font
-r = run._element
-r.rPr.rFonts.set(qn('w:eastAsia'), '黑体')  # CJK font
+rPr = run._element.get_or_add_rPr()
+rPr_fonts = rPr.find(qn('w:rFonts'))
+if rPr_fonts is None:
+    rPr_fonts = etree.SubElement(rPr, qn('w:rFonts'))
+rPr_fonts.set(qn('w:eastAsia'), '黑体')  # CJK font
 ```
+
+**Why this matters**: `run._element.rPr` can be `None` when the run was created via `add_run()` without any explicit font property being set first. The unwrapped `r.rPr.rFonts.set(...)` pattern crashes with `AttributeError: 'NoneType' object has no attribute 'set'`. Always use `get_or_add_rPr()` + lxml `SubElement` to ensure the XML path exists. This is the number-one silent crash when generating docx from scratch.
 
 ## Text search and replace
 
@@ -241,6 +248,8 @@ For **full quotation document generation** (cover page, categorized hardware tab
 8. **Font color on new paragraphs**: the first `add_run()` creates the initial run automatically; subsequent formatting needs explicit `run.font.color.rgb = ...`.
 9. **Multiple saves**: each `doc.save()` writes the full document. No need to save between insertions — save once at the end.
 10. **Large documents** (>500 paragraphs) can be slow. Batch all edits before saving once.
+11. **`run._element.rPr` is None on freshly created runs**: accessing `run._element.rPr.rFonts` directly crashes with `AttributeError`. Always use `run._element.get_or_add_rPr()` + `rPr.find(qn('w:rFonts'))` + `etree.SubElement` fallback to set CJK fonts safely (see "Font for Chinese text" above for the safe pattern).
+12. **Bid-quotation generation pattern**: When creating documents with many tables from scratch, define helper functions (cell_text, make_table, set_shading) in a single script rather than building tables inline. Batch all edits and call `doc.save()` once at the end — multiple saves are not needed and slow things down.
 
 ## When NOT to use this skill
 
