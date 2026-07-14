@@ -208,6 +208,25 @@ for para in insert.paragraphs:
     main.element.append(para._element)
 ```
 
+### Workflow 4: Create a Chinese budget/bid quotation table from scratch
+
+Building a complete budget table (模块-子项-分项预算-模块合计-总合计) with proper Chinese formatting, styling, and constraint checking:
+
+```python
+modules = [
+    {
+        'name': '模块一：数据库模块',
+        'items': [
+            ('工作项描述', 14),   # 14 = ¥14,000
+        ],
+        'subtotal': 68,
+    },
+]
+total = sum(m['subtotal'] for m in modules) * 1000  # 500,000
+```
+
+See `references/chinese-budget-table.md` for full implementation: table setup, cell shading helpers, font configuration, money formatting, and constraint checking.
+
 ## Pitfalls
 
 1. **`insert_paragraph_after()` does NOT exist** in python-docx. Always use the `_element.addnext()` trick.
