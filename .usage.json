@@ -160,13 +160,13 @@
     "created_at": "2026-05-24T17:54:43.971749+00:00",
     "created_by": "agent",
     "last_patched_at": "2026-07-11T15:53:35.607049+00:00",
-    "last_used_at": "2026-07-11T15:54:48.430587+00:00",
-    "last_viewed_at": "2026-07-11T15:54:48.426362+00:00",
+    "last_used_at": "2026-08-07T01:00:24.444583+00:00",
+    "last_viewed_at": "2026-07-28T12:56:19.596683+00:00",
     "patch_count": 42,
     "pinned": false,
     "state": "active",
-    "use_count": 62,
-    "view_count": 56
+    "use_count": 67,
+    "view_count": 57
   },
   "blogwatcher": {
     "archived_at": null,
@@ -186,8 +186,21 @@
     "created_at": "2026-06-10T07:24:15.810139+00:00",
     "created_by": null,
     "last_patched_at": null,
-    "last_used_at": "2026-06-10T07:24:15.814000+00:00",
-    "last_viewed_at": "2026-06-10T07:24:15.810163+00:00",
+    "last_used_at": "2026-08-03T16:12:45.715744+00:00",
+    "last_viewed_at": "2026-08-03T16:12:45.710240+00:00",
+    "patch_count": 0,
+    "pinned": false,
+    "state": "active",
+    "use_count": 2,
+    "view_count": 2
+  },
+  "browser-act-skill-forge": {
+    "archived_at": null,
+    "created_at": "2026-08-03T16:12:45.723977+00:00",
+    "created_by": null,
+    "last_patched_at": null,
+    "last_used_at": "2026-08-03T16:12:45.729098+00:00",
+    "last_viewed_at": "2026-08-03T16:12:45.723995+00:00",
     "patch_count": 0,
     "pinned": false,
     "state": "active",
@@ -281,7 +294,7 @@
     "last_viewed_at": "2026-06-30T16:48:17.494460+00:00",
     "patch_count": 1,
     "pinned": false,
-    "state": "active",
+    "state": "stale",
     "use_count": 4,
     "view_count": 4
   },
@@ -302,14 +315,14 @@
     "archived_at": null,
     "created_at": "2026-07-14T02:48:40.659903+00:00",
     "created_by": null,
-    "last_patched_at": "2026-07-14T08:23:43.619713+00:00",
-    "last_used_at": "2026-07-14T08:24:36.893615+00:00",
-    "last_viewed_at": "2026-07-14T08:24:36.887855+00:00",
-    "patch_count": 4,
+    "last_patched_at": "2026-08-05T16:51:09.657050+00:00",
+    "last_used_at": "2026-08-05T16:46:15.105716+00:00",
+    "last_viewed_at": "2026-08-05T16:46:15.101133+00:00",
+    "patch_count": 6,
     "pinned": false,
     "state": "active",
-    "use_count": 5,
-    "view_count": 5
+    "use_count": 6,
+    "view_count": 6
   },
   "dogfood": {
     "archived_at": null,
@@ -485,13 +498,13 @@
     "created_at": "2026-07-03T14:41:41.531301+00:00",
     "created_by": null,
     "last_patched_at": null,
-    "last_used_at": "2026-07-14T09:06:28.255218+00:00",
-    "last_viewed_at": "2026-07-14T09:06:28.250928+00:00",
+    "last_used_at": "2026-08-05T15:58:50.782530+00:00",
+    "last_viewed_at": "2026-08-05T15:58:50.776313+00:00",
     "patch_count": 0,
     "pinned": false,
     "state": "active",
-    "use_count": 3,
-    "view_count": 3
+    "use_count": 4,
+    "view_count": 4
   },
   "hermes-agent-skill-authoring": {
     "archived_at": null,
@@ -576,13 +589,13 @@
     "created_at": "2026-06-03T15:38:54.851553+00:00",
     "created_by": "agent",
     "last_patched_at": null,
-    "last_used_at": "2026-06-09T15:31:27.490921+00:00",
-    "last_viewed_at": "2026-06-09T15:31:27.486761+00:00",
+    "last_used_at": "2026-08-03T16:10:18.562076+00:00",
+    "last_viewed_at": "2026-08-03T16:10:18.556985+00:00",
     "patch_count": 0,
     "pinned": false,
     "state": "active",
-    "use_count": 1,
-    "view_count": 1
+    "use_count": 2,
+    "view_count": 2
   },
   "jupyter-live-kernel": {
     "archived_at": null,
@@ -601,14 +614,14 @@
     "archived_at": null,
     "created_at": "2026-07-13T16:33:29.374491+00:00",
     "created_by": "agent",
-    "last_patched_at": "2026-07-13T16:34:07.875058+00:00",
-    "last_used_at": "2026-07-13T16:35:06.999478+00:00",
-    "last_viewed_at": "2026-07-13T16:35:06.995387+00:00",
-    "patch_count": 2,
+    "last_patched_at": "2026-07-28T13:04:22.459965+00:00",
+    "last_used_at": "2026-07-28T13:38:09.458327+00:00",
+    "last_viewed_at": "2026-07-28T13:38:09.452493+00:00",
+    "patch_count": 9,
     "pinned": false,
     "state": "active",
-    "use_count": 3,
-    "view_count": 3
+    "use_count": 17,
+    "view_count": 17
   },
   "llama-cpp": {
     "archived_at": null,
@@ -719,13 +732,13 @@
     "created_at": "2026-07-07T17:04:54.447598+00:00",
     "created_by": null,
     "last_patched_at": null,
-    "last_used_at": "2026-07-13T16:31:38.918654+00:00",
-    "last_viewed_at": "2026-07-13T16:31:38.914604+00:00",
+    "last_used_at": "2026-07-28T12:51:40.485687+00:00",
+    "last_viewed_at": "2026-07-28T12:51:40.469737+00:00",
     "patch_count": 0,
     "pinned": false,
     "state": "active",
-    "use_count": 2,
-    "view_count": 2
+    "use_count": 5,
+    "view_count": 5
   },
   "ocr-and-documents": {
     "archived_at": null,
@@ -905,7 +918,7 @@
     "last_viewed_at": "2026-06-30T16:48:17.511894+00:00",
     "patch_count": 22,
     "pinned": false,
-    "state": "active",
+    "state": "stale",
     "use_count": 31,
     "view_count": 31
   },
@@ -1096,13 +1109,13 @@
     "created_at": "2026-06-04T16:03:23.901544+00:00",
     "created_by": null,
     "last_patched_at": "2026-07-05T16:55:07.674444+00:00",
-    "last_used_at": "2026-07-06T00:31:36.569871+00:00",
-    "last_viewed_at": "2026-07-06T00:31:36.566243+00:00",
+    "last_used_at": "2026-07-18T17:10:54.195380+00:00",
+    "last_viewed_at": "2026-07-18T17:10:54.190212+00:00",
     "patch_count": 2,
     "pinned": false,
     "state": "active",
-    "use_count": 4,
-    "view_count": 4
+    "use_count": 6,
+    "view_count": 6
   },
   "songsee": {
     "archived_at": null,
@@ -1160,6 +1173,19 @@
     "archived_at": null,
     "created_at": "2026-07-07T17:04:54.655617+00:00",
     "created_by": null,
+    "last_patched_at": null,
+    "last_used_at": null,
+    "last_viewed_at": null,
+    "patch_count": 0,
+    "pinned": false,
+    "state": "active",
+    "use_count": 0,
+    "view_count": 0
+  },
+  "technical-procurement-quotation": {
+    "archived_at": null,
+    "created_at": "2026-08-05T16:48:16.260718+00:00",
+    "created_by": "agent",
     "last_patched_at": null,
     "last_used_at": null,
     "last_viewed_at": null,

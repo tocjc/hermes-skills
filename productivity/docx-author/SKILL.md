@@ -227,6 +227,8 @@ total = sum(m['subtotal'] for m in modules) * 1000  # 500,000
 
 See `references/chinese-budget-table.md` for full implementation: table setup, cell shading helpers, font configuration, money formatting, and constraint checking.
 
+For **full quotation document generation** (cover page, categorized hardware tables, software breakdown, consolidated summary, commercial terms), see `references/quotation-document-structure.md`.
+
 ## Pitfalls
 
 1. **`insert_paragraph_after()` does NOT exist** in python-docx. Always use the `_element.addnext()` trick.
