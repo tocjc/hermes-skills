@@ -296,6 +296,16 @@ After finding the prior cron session, scroll into its last assistant message wit
 - **Official website articles**: compare article titles and dates
 - **Channel status**: note if any channels changed accessibility since last week
 
+#### ⚠️ Scouting prior runs: use discovery snippets, NOT scroll windows
+
+Cron user prompts embed the **entire SKILL.md**, so `session_search(session_id=..., around_message_id=...)` scroll payloads blow past the output cap and get truncated mid-response ("could not be saved to sandbox"); worse, guessed message ids fail with `around_message_id not in session` because ids within a session are NOT contiguous. Avoid both failure modes:
+
+1. **Use discovery mode first**: `session_search(query="SILENT <project>", sort="newest")`. Each result's `snippet` already contains the tail of that run's final message — either the report header (`# 📡 ... 周报`) or `[SILENT]` — and `bookend_end` shows the last few assistant messages. Usually enough to classify a run with ZERO scrolls.
+2. **Scroll only when absolutely needed**, anchored strictly on the discovery `match_message_id` (the only guaranteed-valid anchor), with `window ≤ 8`.
+3. **Dangling runs**: a cron session can die mid-tool-loop (tool-iteration cap, context exhaustion) and end at a raw tool result with **no final assistant message** — it never produced a report. Treat dangling runs as **no content**: they neither confirm nor break a [SILENT] chain. When the chain is ambiguous, count only sessions that ended with an actual assistant output, and use the last full report as the baseline.
+
+Real case (2026-08): chain was 07-17 `[SILENT]` → 07-24 dangling (68 msgs, ended at tool output) → 07-31/08-07 `[SILENT]` → 08-14 status check. Classifying the whole chain took 3 discovery calls instead of a dozen scrolls.
+
 ### Cron Job Checklist
 - Set `notify_on_complete=true` so the cron agent knows the run finished
 - Use `todo` to track multi-step progress across potential context limits

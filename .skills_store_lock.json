@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "skills": {
+    "@user_741dc82b/libai": {
+      "name": "李白.Skill",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=libai&namespace=user_741dc82b",
+      "source": "community",
+      "version": "1.0.4",
+      "namespace": {
+        "canonicalName": "@user_741dc82b/libai",
+        "displayName": "user_741dc82b",
+        "handle": "user_741dc82b",
+        "publicSlug": "libai"
+      },
+      "internalSlug": "libai",
+      "publicSlug": "libai",
+      "installDir": "/root/.hermes/skills/@user_741dc82b/libai"
+    },
+    "@user_741dc82b/make-to-markdown": {
+      "name": "make-to-markdown",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=make-to-markdown&namespace=user_741dc82b",
+      "source": "community",
+      "version": "1.0.11",
+      "namespace": {
+        "canonicalName": "@user_741dc82b/make-to-markdown",
+        "displayName": "user_741dc82b",
+        "handle": "user_741dc82b",
+        "publicSlug": "make-to-markdown"
+      },
+      "internalSlug": "make-to-markdown",
+      "publicSlug": "make-to-markdown",
+      "installDir": "/root/.hermes/skills/@user_741dc82b/make-to-markdown"
+    }
+  }
+}
